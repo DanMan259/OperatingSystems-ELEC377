@@ -26,7 +26,8 @@ int main(){
 
 	n = scandir("/proc", &namelist, isProcessDir, NULL);
     for (i = 0; i < n; i++) {
-        sprintf(buffer, "/proc/%d/status",namelist[i]->d_name);
+        sprintf(buffer, "/proc/%s/status",namelist[i]->d_name);
         printf("%s\n",buffer);
+	printf("%s\n",namelist[i]->d_name);	
 	}
 }
