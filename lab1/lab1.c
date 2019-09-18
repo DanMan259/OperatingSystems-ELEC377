@@ -28,7 +28,7 @@ void main(){
 	char *ptr;
 	n = scandir("/proc", &namelist, isProcessDir, NULL);
 	
-	printf("#  Name\tStatus\tUser  Group\n");
+	printf("#  Name \tStatus\t\tUser\tGroup\n");
     for (i = 0; i < n; i++) {
         sprintf(buffer, "/proc/%s/status",namelist[i]->d_name);
         fp = fopen (buffer, "r");
@@ -40,14 +40,12 @@ void main(){
 	            strcpy(name, ptr);
 	            if ((ptr=strchr(name, '\n')) != NULL)
                     *ptr = '\0';
-	            //printf("%s", name);
             }else if (strstr(fileBuffer, "State:")){
                 ptr = strtok(fileBuffer, ":\t");
 	            ptr = strtok(NULL, "\t");
 	            strcpy(status, ptr);
 	            if ((ptr=strchr(status, '\n')) != NULL)
                     *ptr = '\0';
-	            //printf("%s", status);
             }/*else if (strstr(fileBuffer, "Pid:")){
                 ptr = strtok(fileBuffer, ":\t");
 	            ptr = strtok(NULL, "\t");
@@ -62,6 +60,6 @@ void main(){
             }*/
         };
         //sprintf(buffer, "%d\t%s\t%s\t%d  %d\n", *number, *name, *status, *user, *group);
-        printf("%s\t%s\n", name, status);
+        printf("1  %s    \t%s\t1\t1\n", name, status);
 	}
 }
