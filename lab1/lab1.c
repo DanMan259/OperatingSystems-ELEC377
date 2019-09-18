@@ -11,7 +11,7 @@
 int isProcessDir(const struct dirent*d){
 	char *temp = d->d_name;
 	while (*temp == "\0"){
-		if (!(isDigit(*temp)){
+		if (!(isdigit(*temp))){
 			return 0;
 		}
 		temp++;
@@ -24,5 +24,5 @@ int main(){
 	int n;
 
 	n = scandir("/proc", &namelist, isProcessDir, NULL);
-	printf("%c",n[0]->dname[0]);
+	printf("%c",namelist[0]->d_name[0]);
 }
