@@ -28,7 +28,7 @@ void main(){
 	char *ptr;
 	n = scandir("/proc", &namelist, isProcessDir, NULL);
 	
-	printf("#  Name \tStatus\t\tUser\tGroup\n");
+	printf("#  Name            \tStatus\t\tUser\tGroup\n");
     for (i = 0; i < n; i++) {
         sprintf(buffer, "/proc/%s/status",namelist[i]->d_name);
         fp = fopen (buffer, "r");
@@ -60,6 +60,6 @@ void main(){
             }*/
         };
         //sprintf(buffer, "%d\t%s\t%s\t%d  %d\n", *number, *name, *status, *user, *group);
-        printf("1  %s    \t%s\t1\t1\n", name, status);
+        printf("1  %s             \t%s\t1\t1\n", name, status);
 	}
 }
