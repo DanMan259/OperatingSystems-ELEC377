@@ -1,11 +1,3 @@
-/******************************************************************************
-
-                            Online C Compiler.
-                Code, Compile, Run and Debug C program online.
-Write your code in this editor and press "Run" button to compile and execute it.
-
-*******************************************************************************/
-
 /*+
  * lab1.c - Print process information
 -*/
@@ -18,7 +10,7 @@ Write your code in this editor and press "Run" button to compile and execute it.
 
 int isProcessDir(const struct dirent*d){
 	char *temp = d->d_name;
-	while (*temp == "\0"){
+          while(*temp != '\0'){
 		if (!(isdigit(*temp))){
 			return 0;
 		}
@@ -29,17 +21,10 @@ int isProcessDir(const struct dirent*d){
 
 int main(){
 	struct dirent ** namelist;
-	int n;
+	int n,i;
 
 	n = scandir("/proc", &namelist, isProcessDir, NULL);
-	struct dirent *temp = namelist;
-	while (temp != NULL){
-	    for (int i = 0; i < strlen(temp->d_name); i++) 
-	        if (temp->d_name[i] == "\0"){
-	            printf("\n");
-	        }else{
-	            printf("%c",temp->d_name[i]);
-	        }
-	    temp++;
+        for (i = 0; i < n; i++) {
+	    printf("%s\n",namelist[i]->d_name);
 	}
 }
