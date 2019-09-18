@@ -28,6 +28,6 @@ int main(){
 	printf("#  Name       Status       User  Group\n")
     for (i = 0; i < n; i++) {
         sprintf(buffer, "/proc/%d/status",namelist[i]->d_name);
-	    printf("%s\n",buffer);
+        printf("%s\n",buffer);
 	}
 }
