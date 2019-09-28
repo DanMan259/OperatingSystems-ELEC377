@@ -21,45 +21,39 @@ int isProcessDir(const struct dirent*d){
 
 void main(){
 	struct dirent ** namelist;
-	char buffer [100];
 	int n,i;
 	FILE *fp;
-	char fileBuffer [100], name [50], status [50], number [50], user [50], group [50];
+	char buffer [50], fileBuffer [50], name [50], status [50], number [50], user [50], group [50];
 	char *ptr;
 	n = scandir("/proc", &namelist, isProcessDir, NULL);
-	
-	printf("#  Name            \tStatus\t\tUser\tGroup\n");
+	printf("#\tName\tStatus\t\tUser\tGroup\n");
     for (i = 0; i < n; i++) {
         sprintf(buffer, "/proc/%s/status",namelist[i]->d_name);
         fp = fopen (buffer, "r");
         while(fgets(fileBuffer, 100, fp)) {
             
             if (strstr(fileBuffer, "Name:")){
-                ptr = strtok(fileBuffer, ":\t");
-	            ptr = strtok(NULL, "\t");
-	            strcpy(name, ptr);
+	            strcpy(name, fileBuffer+6);
 	            if ((ptr=strchr(name, '\n')) != NULL)
                     *ptr = '\0';
             }else if (strstr(fileBuffer, "State:")){
-                ptr = strtok(fileBuffer, ":\t");
-	            ptr = strtok(NULL, "\t");
-	            strcpy(status, ptr);
+	            strcpy(status, fileBuffer+7);
 	            if ((ptr=strchr(status, '\n')) != NULL)
                     *ptr = '\0';
-            }/*else if (strstr(fileBuffer, "Pid:")){
-                ptr = strtok(fileBuffer, ":\t");
-	            ptr = strtok(NULL, "\t");
-	            status = ptr;
-	            printf("%s", status);
+            }else if (strstr(fileBuffer, "Pid:") && !strstr(fileBuffer, "PPid:") && !strstr(fileBuffer, "TracerPid:")){
+	            strcpy(number, fileBuffer+5);
+	            if ((ptr=strchr(number, '\n')) != NULL)
+                    *ptr = '\0';
             }else if (strstr(fileBuffer, "Uid:")){
-                //printf("Yes3\n");
-                //user = strtok(fileBuffer, " ");
+                strcpy(user, fileBuffer+5);
+                if ((ptr=strchr(user, '\t')) != NULL)
+                    *ptr = '\0';
             }else if (strstr(fileBuffer, "Gid:")){
-                //printf("Yes4\n");
-                //group = strtok(fileBuffer, " ");
-            }*/
+                strcpy(group, fileBuffer+5);
+                if ((ptr=strchr(group, '\t')) != NULL)
+                    *ptr = '\0';
+            }
         };
-        //sprintf(buffer, "%d\t%s\t%s\t%d  %d\n", *number, *name, *status, *user, *group);
-        printf("1  %s             \t%s\t1\t1\n", name, status);
+        printf("%s\t%s\t%s\t%s\t%s\n",number, name, status, user, group);
 	}
 }
