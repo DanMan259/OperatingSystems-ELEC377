@@ -33,6 +33,8 @@ void main(){
 	// This gets the number of files in the /proc directory 
 	// It also stores the process dirents in namelist
 	n = scandir("/proc", &namelist, isProcessDir, NULL);
+	// Print the description
+	printf("The currently running processes are:\n");
 	// Print the header
 	printf("#\tName\t\tStatus\t\tUser\tGroup\n");
     // Iterate through each process
