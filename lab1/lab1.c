@@ -34,7 +34,7 @@ void main(){
 	// It also stores the process dirents in namelist
 	n = scandir("/proc", &namelist, isProcessDir, NULL);
 	// Print the header
-	printf("#\tName\tStatus\t\tUser\tGroup\n");
+	printf("#\tName\t\tStatus\t\tUser\tGroup\n");
     // Iterate through each process
     for (i = 0; i < n; i++) {
         // This creates a file name string based off the process
@@ -54,8 +54,17 @@ void main(){
                 // where we want to cut the string
                 if ((ptr=strchr(name, '\n')) != NULL)
                     // We replace cutting point with
-                    // the null charater
-                    *ptr = '\0';
+                    // the correct number of tabs depending 
+                    // on the string length and then append the
+                    // null charater to complete the string
+                    if (strlen(name) >= 8){
+                        *ptr++ = '\t';
+                        *ptr = '\0';
+                    }else{
+                        *ptr++ = '\t';
+                        *ptr++ = '\t';
+                        *ptr = '\0';
+                    }
             }else if (strstr(fileBuffer, "State:")){
                 strcpy(status, fileBuffer+7);
                 if ((ptr=strchr(status, '\n')) != NULL)
@@ -75,6 +84,6 @@ void main(){
             }
         }
         // This prints the string with the info on each of the process
-        printf("%s\t%s\t%s\t%s\t%s\n",number, name, status, user, group);
+        printf("%s\t%s%s\t%s\t%s\n",number, name, status, user, group);
 	}
 }
