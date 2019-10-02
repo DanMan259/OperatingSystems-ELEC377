@@ -25,7 +25,7 @@ int my_read_proc(...) {
 	return numChars;
 }
 int init_module() {
-	//todo
+	struct prov_dir_entry * proc_entry;
 }
 
 void init_module() {
