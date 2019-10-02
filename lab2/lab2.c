@@ -3,6 +3,10 @@
 #include <linux/proc_fs.h>
 #include <linux/sched.h>
 
+#define nr_threads_LOC 0Xc038b3a8
+
+int *nr_threads_ptr = (int*)nr_threads_LOC;
+
 static struct task_struct *firstTask, *nextTask;
 
 int my_read_proc(...) { 
