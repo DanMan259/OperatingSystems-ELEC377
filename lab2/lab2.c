@@ -12,7 +12,7 @@
 
 #define NR_THREADS 0Xc038b3a8
 
-static struct task_struct * firstTask, *lastTask;
+static struct task_struct *theTask, *lastTask;
 
 int cnt;
 
@@ -47,16 +47,14 @@ int my_read_proc(char * page, char **start, off_t fpos, int blen, int * eof, voi
 
 int init_module(){
    struct proc_dir_entry * proc_entry;
-   char [] procName = "lab2"
    proc_entry = create_proc_entry("lab2", 0444, NULL);
    if (proc_entry == NULL) {
         remove_proc_entry("lab2", &proc_root);
-        printk(KERN_ALERT "Error: Could not initialize /proc/%s\n",
-                procfs_name);
+        printk(KERN_ALERT "Error: Could not initialize /proc/lab2\n");
         return -ENOMEM;
    }
    proc_entry->read_proc = my_read_proc;
-   return 0
+   return 0;
 }
 
 void cleanup_module(){
