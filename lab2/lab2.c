@@ -19,8 +19,9 @@ int cnt;
 int my_read_proc(char * page, char **start, off_t fpos, int blen, int * eof, void * data){
     int numChars = 0;
     if (fpos == 0){
-	     numChars += sprintf(page, "Number of running processes: %d\n", nr_running);
-	     numChars += sprintf(page + numChars, "Number of running threads: %d\n", (int*)NR_THREADS);
+        int* nr_threads = NR_THREADS;
+        numChars += sprintf(page, "Number of running processes: %d\n", nr_running);
+	     numChars += sprintf(page + numChars, "Number of running threads: %d\n", *nr_threads);
 	     numChars += sprintf(page + numChars, "PID\tUID\tNICE\n");
 	     // First Task
 	     theTask = &init_task;
@@ -36,7 +37,7 @@ int my_read_proc(char * page, char **start, off_t fpos, int blen, int * eof, voi
             return 0;
         }
         if (theTask -> pid != 0){
-            numChars += sprintf(page + numChars, "%d\t%d\t%d\n", theTask->pid, theTask->uid, theTask->nice);
+            numChars += sprintf(page, "%d\t%d\t%d\n", theTask->pid, theTask->uid, theTask->nice);
         }
         lastTask = lastTask->next_task;
     }
