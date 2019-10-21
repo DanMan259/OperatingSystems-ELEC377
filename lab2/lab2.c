@@ -10,7 +10,7 @@
 #include <linux/proc_fs.h>
 #include <linux/sched.h>
 
-#define NR_THREADS 0Xc038b3a8
+#define NR_THREADS 0xc038b3a8
 
 static struct task_struct *theTask, *lastTask;
 
@@ -36,8 +36,8 @@ int my_read_proc(char * page, char **start, off_t fpos, int blen, int * eof, voi
             *start = page;
             return 0;
         }
-        if (theTask -> pid != 0){
-            numChars += sprintf(page, "%d\t%d\t%d\n", theTask->pid, theTask->uid, theTask->nice);
+        if (lastTask -> pid != 0){
+            numChars += sprintf(page, "%d\t%d\t%d\n", lastTask->pid, lastTask->uid, lastTask->nice);
         }
         lastTask = lastTask->next_task;
     }
