@@ -55,8 +55,26 @@ int main (int argc, char *argv[]){
 	}
 	
 	mutexInit(memptr);
+	int numProducers = 0
+	char CHAR
+	getMutex(pid);
+	memptr->numProducers++;
+	releaseMutex(pid)
+	
+	while (CHAR =getChar() != EOF){
+		stored = FALSE;
+		while (stored){
+			getMutex(pid);
+			if (STILLROOM){
+				stored = TRUE;
+			}
+			releaseMutex(pid);
+		}
+	}
+	getMutex(pid);
+	memptr->numProducers--;
+	releaseMutex(pid);
 
-    // put your code here..
 
 	return 0;
 }

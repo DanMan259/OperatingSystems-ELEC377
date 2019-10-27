@@ -54,7 +54,6 @@ int main (int argc, char *argv[]){
 	
 	mutexInit(memptr);
 	
-    // put your code here...
     
 	return 0;
 }

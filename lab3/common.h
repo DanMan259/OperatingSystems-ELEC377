@@ -12,6 +12,13 @@
 #define NUMPROCS 5
 
 struct shared {
+    int waiting[NUMPROCS];
+    int lock;
+    int numProducers;
+    char buffer[BUFFSIZE];
+    int in;
+    int out;
+    int count;
 };
 
 

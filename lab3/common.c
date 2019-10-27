@@ -35,10 +35,17 @@ void mutexInit(struct shared *memptr){
 void getMutex(short pid){
 	// this should not return until it has mutual exclusion. Note that many versions of 
 	// this will probobly be running at the same time.
-
+    sharedptr->waiting[pid] = TRUE;
+    int key = TRUE;
+    while (sharedptr->waiting[pid] && key) key = test_and_set(&sharedptr->lock);
+    sharedptr->waiting[pid] = FALSE;
 }
 
 void releaseMutex(short pid){
 	// set the mutex back to initial state so that somebody else can claim it
+    int j = (pid + 1) % NUMPROCS;
+    while (j!=pid && !sharedptr->waiting[j]) j=(j+1)%NUMPROCS;
+    if (pid == j) sharedptr->lock = FALSE;
+    else sharedptr->waiting[j] = FALSE;
 }
 
