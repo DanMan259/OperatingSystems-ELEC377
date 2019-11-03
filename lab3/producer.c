@@ -56,16 +56,19 @@ int main (int argc, char *argv[]){
 	
 	mutexInit(memptr);
 	int numProducers = 0
-	char CHAR
+	char currCharacter;
 	getMutex(pid);
 	memptr->numProducers++;
 	releaseMutex(pid)
 	
-	while (CHAR =getChar() != EOF){
+	while (currCharacter = getChar() != EOF){
 		stored = FALSE;
-		while (stored){
+		while (stored == FALSE){
 			getMutex(pid);
-			if (STILLROOM){
+			if (memptr->count < BUFFSIZE){
+				memptr->buffer[memptr->in] =  currCharacter;
+				memptr->in =  (memptr->in+1)%BUFFSIZE;
+				memptr->count++;
 				stored = TRUE;
 			}
 			releaseMutex(pid);
