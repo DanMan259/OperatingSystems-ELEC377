@@ -55,7 +55,7 @@ int main (int argc, char *argv[]){
 	}
 	
 	mutexInit(memptr);
-	int numProducers = 0
+	int numProducers = 0;
 	char currCharacter;
 	getMutex(pid);
 	memptr->numProducers++;
