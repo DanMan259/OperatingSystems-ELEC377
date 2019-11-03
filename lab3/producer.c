@@ -59,7 +59,7 @@ int main (int argc, char *argv[]){
 	char currCharacter;
 	getMutex(pid);
 	memptr->numProducers++;
-	releaseMutex(pid)
+	releaseMutex(pid);
 	
 	while (currCharacter = getChar() != EOF){
 		stored = FALSE;
