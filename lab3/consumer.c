@@ -69,7 +69,7 @@ int main (int argc, char *argv[]){
 				currCharacter = memptr->buffer[memptr->out];
 				memptr->count--;
 				memptr->out = (memptr->out + 1) % BUFFSIZE;
-				retrieved = TRUE;
+				retrChar = TRUE;
 			}
 			if (memptr->numProducers == 0) {
 				releaseMutex(pid);
