@@ -17,10 +17,8 @@
 #define TRUE 1
 
 int main (int argc, char *argv[]){
-
 	// initialize the shared memory, load in the initial array's, spawn the worker
 	// processes.
-
 	key_t   key;
 	struct shared    *memptr;
 	int shmid;
@@ -35,7 +33,6 @@ int main (int argc, char *argv[]){
         fprintf(stderr,"pid between 0 and %d\n",NUMPROCS-1);
         exit(1);
     }
-
 
 	/*	 Shared memory init 	*/
 	key = ftok(".", 'S');
@@ -62,7 +59,7 @@ int main (int argc, char *argv[]){
 		}
 		releaseMutex(pid);
 		int retrChar = FALSE;
-		int currCharacter;
+		char currCharacter;
 		while (retrChar == FALSE) {
 			getMutex(pid);
 			if (memptr->count != 0) {
