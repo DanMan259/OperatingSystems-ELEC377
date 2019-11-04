@@ -32,8 +32,11 @@ void getMutex(short pid){
 	// this should not return until it has mutual exclusion. Note that many versions of 
 	// this will probobly be running at the same time.
     sharedptr->waiting[pid] = TRUE;
+    // initialize test and set key
     int key = TRUE;
+    // ensure key has access and pid is in queue
     while (sharedptr->waiting[pid] && key) {
+        // set key based on test_and_set
         key = test_and_set(&sharedptr->lock);
     }  
     sharedptr->waiting[pid] = FALSE;
@@ -41,9 +44,11 @@ void getMutex(short pid){
 
 void releaseMutex(short pid){
 	// set the mutex back to initial state so that somebody else can claim it
+    // initialize counter to iterate through processes
     short j = (pid + 1) % NUMPROCS;
+    // ensures counter exists in queue
     while ((j!=pid) && (!sharedptr->waiting[j])){ 
-	j=(j+1)%NUMPROCS;
+	    j=(j+1)%NUMPROCS;
 	}
     if (pid == j) {
         sharedptr->lock = FALSE;

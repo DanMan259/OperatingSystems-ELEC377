@@ -49,25 +49,31 @@ int main (int argc, char *argv[]){
 	    exit(1);
 	}
 	
+	// intialize mutex with memptr struct
 	mutexInit(memptr);
 	
     while (1) {
+		// gets mutex with current pid
 		getMutex(pid);
+		// checks if mutex should release pid and breaks if true
 		if ((memptr->count == 0) && (memptr->numProducers == 0)) {
 			releaseMutex(pid);
 			break;
 		}
 		releaseMutex(pid);
+		// initialize variables for checking buffer status
 		int retrChar = FALSE;
 		char currCharacter;
 		while (retrChar == FALSE) {
 			getMutex(pid);
+			// checks count for current objects in buffer and updates currCharacter
 			if (memptr->count != 0) {
 				currCharacter = memptr->buffer[memptr->out];
 				memptr->count--;
 				memptr->out = (memptr->out + 1) % BUFFSIZE;
 				retrChar = TRUE;
 			}
+			// check if theres no  producers
 			if (memptr->numProducers == 0) {
 				releaseMutex(pid);
 				break;

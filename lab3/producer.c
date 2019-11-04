@@ -54,16 +54,20 @@ int main (int argc, char *argv[]){
 	    exit(1);
 	}
 	
+	// initialize variables for checking mutex status
 	mutexInit(memptr);
 	getMutex(pid);
 	memptr->numProducers++;
 	releaseMutex(pid);
 	int currCharacter;
 
+	// ensure end of file hasn't been reached
 	while ((currCharacter = getchar()) != EOF){
 		stored = FALSE;
+		// loop used to store values in the buffer
 		while (stored == FALSE){
 			getMutex(pid);
+			// check buffer hasn't been filled
 			if (memptr->count < BUFFSIZE){
 				memptr->buffer[memptr->in] = currCharacter;
 				memptr->in = (memptr->in + 1) % BUFFSIZE;
@@ -73,6 +77,7 @@ int main (int argc, char *argv[]){
 			releaseMutex(pid);
 		}
 	}
+	// decrements number of producers
 	getMutex(pid);
 	memptr->numProducers--;
 	releaseMutex(pid);

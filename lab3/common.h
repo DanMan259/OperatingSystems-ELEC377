@@ -12,6 +12,7 @@
 #define NUMPROCS 5
 
 struct shared {
+    // initialize global variables
     int waiting[NUMPROCS];
     int lock;
     int numProducers;
@@ -21,7 +22,7 @@ struct shared {
     int count;
 };
 
-
+// initialize header definitions
 void mutexInit(struct shared *memptr);
 void getMutex(short pid);
 void releaseMutex(short pid);
