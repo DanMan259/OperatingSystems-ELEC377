@@ -44,7 +44,7 @@ void getMutex(short pid){
 void releaseMutex(short pid){
 	// set the mutex back to initial state so that somebody else can claim it
     short j = (pid + 1) % NUMPROCS;
-    while ((j!=pid) && (!sharedptr->waiting[j]) j=(j+1)%NUMPROCS;
+    while ((j!=pid) && (!sharedptr->waiting[j])) j=(j+1)%NUMPROCS;
     if (pid == j) sharedptr->lock = FALSE;
     else sharedptr->waiting[j] = FALSE;
 }
