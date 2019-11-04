@@ -62,7 +62,7 @@ int main (int argc, char *argv[]){
 		}
 		releaseMutex(pid);
 		int retrChar = FALSE;
-		char currCharacter;
+		int currCharacter;
 		while (retrChar == FALSE) {
 			getMutex(pid);
 			if (memptr->count != 0) {
