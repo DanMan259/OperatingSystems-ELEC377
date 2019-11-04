@@ -60,7 +60,7 @@ int main (int argc, char *argv[]){
 	releaseMutex(pid);
 	int currCharacter;
 
-	while (currCharacter = getchar() != EOF){
+	while ((currCharacter = getchar()) != EOF){
 		stored = FALSE;
 		while (stored == FALSE){
 			getMutex(pid);
