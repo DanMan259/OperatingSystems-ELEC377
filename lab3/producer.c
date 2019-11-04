@@ -55,11 +55,11 @@ int main (int argc, char *argv[]){
 	}
 	
 	mutexInit(memptr);
-	int currCharacter;
 	getMutex(pid);
 	memptr->numProducers++;
 	releaseMutex(pid);
-	
+	int currCharacter;
+
 	while (currCharacter = getchar() != EOF){
 		stored = FALSE;
 		while (stored == FALSE){
