@@ -3,11 +3,11 @@
 MAINFILES=""
 MODFILES=""
 OTHERFILES=""
-for FILE in $(find $1 -name "*.c"); do
+for FILE in $(find $1 -type f -name "*.c"); do
     if grep -wq "int main" $FILE; then
         MAINFILES="$MAINFILES$FILE:$(cat $FILE | grep printf | wc -l),$(cat $FILE | grep fprintf | wc -l)\n"
     elif grep -wq "init_module" $FILE; then
-        MODFILES="$MODILES$FILE:$(grep -n "printk" $FILE | sed -e 's/:.*//' | tr '\n' ',' | sed -e 's/,$//')\n"
+        MODFILES="$MODFILES$FILE:$(grep -n "printk" $FILE | sed -e 's/:.*//' | tr '\n' ',' | sed -e 's/,$//')\n"
     else
         OTHERFILES="$OTHERFILES$FILE\n"
     fi
