@@ -29,4 +29,4 @@ by appending the line numbers where 'printk' occurs to the path string.
 Finally, the paths for 'other' files are added to its respective string.  
 Fallback prcedures are implemented to ensure that if there are no files of 
 a type the script outputs "No Files" of the respective type. The strings are 
-then formatted and outputed into an 'echo' command at the end of the script. 
+then formatted and output into an 'echo' command at the end of the script. 
