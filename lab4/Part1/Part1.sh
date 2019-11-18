@@ -11,6 +11,6 @@ for FILE in $(ls -vd /proc/[1-9]*); do
             RSS=0 
         fi
         CMD=$(cat $FILE/cmdline | tr '\0' ' ')
-        echo -e '$PID\t\t$USER\t$RSS\t$CMD'
+        echo -e "$PID\t\t$USER\t$RSS\t$CMD"
     fi
 done 
