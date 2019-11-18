@@ -4,6 +4,7 @@ MAINFILES=""
 MODFILES=""
 OTHERFILES=""
 for FILE in $(find $1 -type f -name "*.c"); do
+    FILE=`readlink -f $FILE`
     if grep -wq "[i,n,t,v,o,i,d]* main" $FILE; then
         MAINFILES="$MAINFILES$FILE:$(cat $FILE | grep -w printf | wc -l),$(cat $FILE | grep -w fprintf | wc -l)\n"
     elif grep -wq "init_module" $FILE; then
@@ -21,4 +22,4 @@ fi
 if test -z $OTHERFILES; then
     OTHERFILES="No other files\n"
 fi
-echo -e "Main Files:\n"$MAINFILES"Module Files:\n"$MODFILES"Other Files:\n$OTHERFILES"
+echo -e "Main Files:\n"$MAINFILES"\nModule Files:\n"$MODFILES"\nOther Files:\n$OTHERFILES"
