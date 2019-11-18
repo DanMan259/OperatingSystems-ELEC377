@@ -12,7 +12,7 @@ the given 'template' command:
 which had the output:
 
 	PID USER     RSS  COMMAND
-  	1 root     240  init [3]
+  	1   root     240  init [3]
   	... ...    ...  ...
 
 The next part of testing included extracting specific parts 
