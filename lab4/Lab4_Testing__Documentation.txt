@@ -1,0 +1,68 @@
+Lab 4 Testing Documentation
+Nicholas Alderman - 16naa5
+Daniyal Maniar - 16mdm13
+
+PART 1
+Most of the testing for part consisted of running individual commands in
+the command terminal, the first of which is the given 'template' command:
+
+	ps -eo pid,user,rss,args
+
+which had the output:
+
+	PID USER     RSS  COMMAND
+  	1 root     240  init [3]
+  	... ...    ...  ...
+
+From this point, the next part of the code that needed testing was extracting
+specific parts of the 'status' to obtain the RSS value. This was done using
+a grep piped into an sed. First it looked like this:
+
+	grep -w VmRSS: $FILE/status | sed -e 's/VmRSS:\t *//'
+
+This removes the keyword that was searched for - 'VmRSS'. Then to remove 'kB':
+
+	grep -w VmRSS: $FILE/status | sed -e 's/VmRSS:\t *//'| sed -e 's/ [kK]B//'
+
+For the proc '1' the original line from the 'status' file and the edited line
+can be seen below:
+
+	Original:              Edited:
+	VmRSS:    240 kB       240
+
+Finally, to get information for the command column, cat was used to get the 
+process command and the 'tr' command was used to effectively remove the null 
+space character out of the string:
+
+	cat $FILE/cmdline | tr '\0' ' '
+
+This gave the output:
+
+	init [3]
+
+To ensure the final formatting and final information was correct and
+consistent we piped the output to a file named 'part1Output.txt'	
+
+PART 2
+Similar to part 1, our main method of testing was through the command line.
+First, we developed how we determined whether a file had a 'main' method.
+We had to ensure that both 'int main' and 'void main' were included so the
+following line was used:
+
+    grep -wq "[i,n,t,v,o,i,d]* main" $FILE
+
+This catches all main function headers that have 'int' or 'void' characters
+before them. From there it was simple count the number of 'printf' and 'fprintf'.
+To append the line number for lines including 'printk', the the following set
+of pipes was each added one at a time:
+
+	printk_lines=`grep -wn 'printk' $FILE | sed -e 's/:.*//' | tr '\n' ','`
+
+This gives stores each line number in a string that separates numbers with
+commas. The last pipe - " tr '\n\ ','" removes the final comma for proper
+formatting.
+
+To ensure the formatting and information was correct and consistent the script
+was tested with relative and full paths to ensure consistency. All possible 
+test cases were tried including one to ensure the fallback procedures worked 
+correctly the output was piped to the output file named 'part2Output.txt'
