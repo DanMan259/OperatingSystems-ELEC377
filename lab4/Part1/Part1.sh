@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo -e "PID\t\tUSER\tRSS\tCOMMAND"
+echo -e "PID\tUSER\tRSS\tCOMMAND"
 
 for FILE in $(ls -vd /proc/[1-9]*); do
     if test -f "$FILE/status"; then
@@ -11,6 +11,6 @@ for FILE in $(ls -vd /proc/[1-9]*); do
             RSS=0 
         fi
         CMD=$(cat $FILE/cmdline | tr '\0' ' ')
-        echo -e "$PID\t\t$USER\t$RSS\t$CMD"
+        echo -e "$PID\t$USER\t$RSS\t$CMD"
     fi
 done 
