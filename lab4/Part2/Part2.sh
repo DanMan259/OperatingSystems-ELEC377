@@ -1,3 +1,5 @@
+#!/bin/bash
+
 MAINFILES=""
 MODFILES=""
 OTHERFILES=""
