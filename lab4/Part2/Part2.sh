@@ -11,6 +11,7 @@ for FILE in $(find $1 -name "*.c"); do
     else
         OTHERFILES="#OTHERFILES$FILE\n"
     fi
+done
 if test -z $MAINFILES; then
     MAINFILES="No main files"
 fi
