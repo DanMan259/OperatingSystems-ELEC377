@@ -20,7 +20,7 @@ for FILE in $(ls -vd /proc/[1-9]*); do
         # get command from 'cmdline' in proc
         CMD=$(cat $FILE/cmdline | tr '\0' ' ')
         if test -z "$CMD"; then
-            CMD = "[$(grep 'Name' $FILE/'status' | sed -e 's/.*\t *//')]"
+            CMD="[$(grep 'Name' $FILE/'status' | sed -e 's/.*\t *//')]"
         fi
         echo -e "$PID\t$USER\t$RSS\t$CMD"
     fi
