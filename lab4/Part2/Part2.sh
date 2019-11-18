@@ -21,4 +21,4 @@ fi
 if test -z $OTHERFILES; then
     OTHERFILES="No other files\n"
 fi
-echo -e "Main Files:\n$MAINFILES Module Files:\n$MODFILES Other Files:\n$OTHERFILES"
+echo -e "Main Files:\n$MAINFILESModule Files:\n$MODFILESOther Files:\n$OTHERFILES"
