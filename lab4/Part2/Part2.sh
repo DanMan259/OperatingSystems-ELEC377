@@ -4,7 +4,7 @@ MAINFILES=""
 MODFILES=""
 OTHERFILES=""
 for FILE in $(find $1 -type f -name "*.c"); do
-    if grep -wq "int main" $FILE; then
+    if grep -wq "[int, void] main" $FILE; then
         MAINFILES="$MAINFILES$FILE:$(cat $FILE | grep -w printf | wc -l),$(cat $FILE | grep -w fprintf | wc -l)\n"
     elif grep -wq "init_module" $FILE; then
         MODFILES="$MODFILES$FILE:$(grep -wn "printk" $FILE | sed -e 's/:.*//' | tr '\n' ',' | sed -e 's/,$//')\n"
