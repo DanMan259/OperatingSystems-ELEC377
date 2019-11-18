@@ -13,12 +13,12 @@ for FILE in $(find $1 -name "*.c"); do
     fi
 done
 if test -z $MAINFILES; then
-    MAINFILES="No main files"
+    MAINFILES="No main files\n"
 fi
 if test -z $MODFILES; then
-    MODFILES="No module files"
+    MODFILES="No module files\n"
 fi
 if test -z $OTHERFILES; then
-    OTHERFILES="No other files"
+    OTHERFILES="No other files\n"
 fi
 echo -e "Main Files:\n$MAINFILES Module Files:\n$MODFILES Other Files:\n$OTHERFILES"
