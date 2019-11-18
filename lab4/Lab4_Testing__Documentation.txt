@@ -3,8 +3,9 @@ Nicholas Alderman - 16naa5
 Daniyal Maniar - 16mdm13
 
 PART 1
-Most of the testing for part consisted of running individual commands in
-the command terminal, the first of which is the given 'template' command:
+Testing for part 1 consisted of running following commands in
+the terminal before generating a script, the first of which is 
+the given 'template' command:
 
 	ps -eo pid,user,rss,args
 
@@ -14,13 +15,16 @@ which had the output:
   	1 root     240  init [3]
   	... ...    ...  ...
 
-From this point, the next part of the code that needed testing was extracting
-specific parts of the 'status' to obtain the RSS value. This was done using
-a grep piped into an sed. First it looked like this:
+The next part of testing included extracting specific parts 
+of the status file to obtain the values such as RSS. This was done using
+a grep command. The output of the grep was piped into sed command 
+to remove unwated characters. We tested the commands into the terminal and 
+built up the final script commmand. The first command looked like this:
 
 	grep -w VmRSS: $FILE/status | sed -e 's/VmRSS:\t *//'
 
-This removes the keyword that was searched for - 'VmRSS'. Then to remove 'kB':
+This previous command removes the keyword that was searched for - 'VmRSS'. 
+The next addition to command removes the 'kB' from the output:
 
 	grep -w VmRSS: $FILE/status | sed -e 's/VmRSS:\t *//'| sed -e 's/ [kK]B//'
 
@@ -40,8 +44,10 @@ This gave the output:
 
 	init [3]
 
-To ensure the final formatting and final information was correct and
-consistent we piped the output to a file named 'part1Output.txt'	
+If the output of cmdline is empty then we check the contents of the 
+status file to match the input to the original command. To ensure the 
+final formatting and final information was correct and consistent we 
+piped the output to a file named 'part1Output.txt'	
 
 PART 2
 Similar to part 1, our main method of testing was through the command line.
@@ -56,13 +62,17 @@ before them. From there it was simple count the number of 'printf' and 'fprintf'
 To append the line number for lines including 'printk', the the following set
 of pipes was each added one at a time:
 
-	printk_lines=`grep -wn 'printk' $FILE | sed -e 's/:.*//' | tr '\n' ','`
+	MODFILES="$MODFILES$FILE:$(grep -wn "printk" $FILE | sed -e 's/:.*//' | tr '\n' ',' | sed -e 's/,$//')\n"
 
 This gives stores each line number in a string that separates numbers with
 commas. The last pipe - " tr '\n\ ','" removes the final comma for proper
-formatting.
+formatting. This is all then appended to the initial string to generate the
+output later.
 
 To ensure the formatting and information was correct and consistent the script
 was tested with relative and full paths to ensure consistency. All possible 
 test cases were tried including one to ensure the fallback procedures worked 
-correctly the output was piped to the output file named 'part2Output.txt'
+correctly. We tested the output of the script for when there was no output 
+files, and it was written to Part2NoOutput.txt. We also tested the output of 
+the script for when there was output for each type of file, this output was 
+written to Part2WithOutput.txt. 
