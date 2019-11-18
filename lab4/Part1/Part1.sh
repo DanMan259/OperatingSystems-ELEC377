@@ -12,13 +12,16 @@ for FILE in $(ls -vd /proc/[1-9]*); do
         # get user using the stat command
         USER=$(stat -c %U $FILE)
         # get RSS value and remove 'VmRSS' and 'kB'
-        RSS=$(cat $FILE/status | grep -w VmRSS: | sed -e 's/VmRSS:\t *//'| sed -e 's/ [kK]B//')
+        RSS=$(grep -w VmRSS: $FILE/status | sed -e 's/VmRSS:\t *//'| sed -e 's/ [kK]B//')
         # check if RSS is empty
         if test -z "$RSS"; then
             RSS=0 
         fi
         # get command from 'cmdline' in proc
         CMD=$(cat $FILE/cmdline | tr '\0' ' ')
+        if test -z "$CMD"; then
+            CMD = "[$(grep 'Name' $FILE/'status' | sed -e 's/.*\t *//')]"
+        fi
         echo -e "$PID\t$USER\t$RSS\t$CMD"
     fi
 done 
