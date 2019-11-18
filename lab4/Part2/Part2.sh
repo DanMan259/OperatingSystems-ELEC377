@@ -9,7 +9,7 @@ for FILE in $(find $1 -name "*.c"); do
     elif grep -wq "init_module" $FILE; then
         MODFILES="$MODILES$FILE:$(grep -n "printk" $FILE | sed -e 's/:.*//' | tr '\n' ',')\n"
     else
-        OTHERFILES="#OTHERFILES$FILE\n"
+        OTHERFILES="$OTHERFILES$FILE\n"
     fi
 done
 if test -z $MAINFILES; then
