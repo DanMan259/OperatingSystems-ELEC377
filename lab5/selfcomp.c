@@ -71,7 +71,7 @@ void doTest(){
        - change compromise1 to compromise
          when shell code is written */
 
-    for (i = 0; compromise1[i]; i++)
-	buffer[i] = compromise1[i];
+    for (i = 0; compromise[i]; i++)
+	buffer[i] = compromise[i];
 }
 
