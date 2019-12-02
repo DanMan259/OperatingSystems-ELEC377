@@ -98,8 +98,18 @@ char compromise[130] = {
     'h','e','l','l','o',' ','t','h','e','r','e','\n'
 };
 
+char * compromise1 =
+    "xxxxxxxxxxxxxxxxxxxx"
+    "xxxxxxxxxxxxxxxxxxxx"
+    "xxxxxxxxxxxxxxxxxxxx"
+    "xxxxxxxxxxxxxxxxxxxx"
+    "xxxxxxxxxxxxxxxxxxxx"
+    "xxxxxxxxxxxxxxxxxxxx"
+    "xxxxxxxxxxxxxxxxxxxx"
+    "WXYZ";
+
 void Attack(FILE *outfile){
-    fprintf(outfile,compromise);
+    fprintf(outfile,compromise1);
     fflush(outfile);
 }
 
