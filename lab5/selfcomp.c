@@ -24,13 +24,8 @@ char * compromise1 =
     "xxxxxxxxxxxxxxxxxxxx"
     "xxxxxxxxxxxxxxxxxxxx"
     "xxxxxxxxxxxxxxxxxxxx"
-    "xxxxxxxxxxxxxxxxxxxx"
-    "xxxxxxxxxxxxxxxxxxxx"
-    "xxxxxxxxxxxxxxxxxxxx"
-    "xxxxxxxxxxxxxxxxxxxx"
-    "xxxxxxxxxxxxxxxxxxxx"
-    "xxxxxxxxxxxxxxxxxxxx"
-    "WXYZ";
+    "xxxxxxxxxxxxxxxxxxxxWXYZ";
+   
 
 int i;
 void doTest(){
