@@ -4,9 +4,9 @@ SELFCOMP.c
 This writes contents of 'compromise' array to buffer in 'doTest' method.
 The 'nop' instructions are used at the beginning of the exploit to ensure
 the return address at the end of the exploit is aligned at the end of the 
-stick in the 'doTest' method. After this, the 'eip' register takes the address returned by 'doTest'. This causes the program counter to point to the 
-beginning of the exploit code. The program counter now executes the exploit as
-it increments continuously.
+stick in the 'doTest' method. After this, the 'eip' register takes the address returned by 'doTest'. 
+This causes the program counter to point to the beginning of the exploit code.
+The program counter now executes the exploit as it increments continuously.
 
 Needed Return Address:    ESP - 4 - newAddr = 0xBFFFF8AF - 0x04 - 0x61 = 0xBFFFF84A
 Total NOP Instructions:   43 = 41 NOP Padding + 2 Exploit NOP
