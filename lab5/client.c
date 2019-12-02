@@ -105,8 +105,9 @@ char * compromise1 =
     "xxxxxxxxxxxxxxxxxxxx"
     "xxxxxxxxxxxxxxxxxxxx"
     "xxxxxxxxxxxxxxxxxxxx"
-    "xxxxxxxxxxxxxxxxxxxx"
-    "WXYZ";
+    "xxxx"
+    "WXYZ"
+    "x";
 
 void Attack(FILE *outfile){
     fprintf(outfile,compromise1);
